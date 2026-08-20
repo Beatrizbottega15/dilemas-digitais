@@ -1,149 +1,45 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dilemas Digitais no Brasil | Experiência Imersiva</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dilemas Digitais no Brasil</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-  <!-- Canvas de fundo interativo (Partículas/Rede) -->
-  <canvas id="bg-canvas"></canvas>
-
-  <!-- Cursor Neon Personalizado -->
-  <div class="custom-cursor" id="cursor"></div>
-
-  <!-- Barra de Acessibilidade / Status do Brasil em Tempo Real -->
-  <header class="hud-header">
-    <div class="brand">
-      <span class="dot-live"></span>
-      <span class="hud-title">DILEMAS_DIGITAIS // BRASIL</span>
-    </div>
-    <div class="hud-stats">
-      <div class="stat-item">
-        <span class="label">CONECTADOS AGORA</span>
-        <span class="value" id="connected-count">4.789</span>
-      </div>
-      <div class="stat-item">
-        <span class="label">STATUS REDE</span>
-        <span class="value cyan">INSTÁVEL (0.5G - 5G)</span>
-      </div>
-    </div>
+  <header>
+    <h1>Dilemas Digitais no Brasil</h1>
+    <p>Reflexões sobre conectividade, desinformação e impacto social.</p>
   </header>
 
-  <!-- Seção Hero Princpal -->
-  <section class="hero-section">
-    <h1 class="glitch-text" data-text="O BRASIL DESCONECTADO">O BRASIL DESCONECTADO</h1>
-    <p class="hero-subtitle">
-      Uma jornada interativa pelos contrastes, bolhas algorítmicas e o impacto social da tecnologia em território nacional.
-    </p>
-    <div class="hero-actions">
-      <a href="#modulos" class="btn-primary">EXPLORAR EXPERIÊNCIA</a>
-      <button class="btn-secondary" onclick="alternarModoZeroData()">
-        <span id="btn-zero-text">SIMULAR "ZERO DATA" (PRE-PAGO)</span>
-      </button>
-    </div>
-  </section>
+  <main class="container">
+    <section class="cards-grid">
+      <article class="card" onclick="mostrarDetalhes('exclusao')">
+        <h2>Exclusão Digital</h2>
+        <p>O abismo entre o acesso pleno e o uso limitado de dados no país.</p>
+      </article>
 
-  <!-- Painel Principal de Módulos Interativos -->
-  <main class="container" id="modulos">
-    
-    <!-- MÓDULO 1: O JOGO DA DESINFORMAÇÃO -->
-    <section class="cyber-card" id="card-fake-news">
-      <div class="card-tag">01 // DEMOCRACIA & ALGORITMOS</div>
-      <h2>O Detective de Fake News</h2>
-      <p>Recebemos centenas de notícias no WhatsApp todos os dias. Você consegue separar o que é real do que é manipulação?</p>
+      <article class="card" onclick="mostrarDetalhes('desinformacao')">
+        <h2>Desinformação</h2>
+        <p>O impacto das fake news na democracia e na saúde pública.</p>
+      </article>
 
-      <div class="game-container">
-        <div class="news-box" id="news-box">
-          <span class="news-source" id="news-source">WhatsApp - Recebido em grupo de família</span>
-          <p class="news-content" id="news-content">
-            "URGENTE: Nova tecnologia de antenas 5G altera o clima no interior do Nordeste para favorecer colheitas!"
-          </p>
-        </div>
-        <div class="game-controls">
-          <button class="btn-fake" onclick="verificarNoticia(true)">FAKENEWS ❌</button>
-          <button class="btn-real" onclick="verificarNoticia(false)">VERDADEIRO ✅</button>
-        </div>
-        <div class="feedback-msg" id="game-feedback"></div>
-        <div class="score-board">Pontuação: <span id="score">0</span> / <span id="total-played">0</span></div>
-      </div>
+      <article class="card" onclick="mostrarDetalhes('saude')">
+        <h2>Saúde Mental</h2>
+        <p>O efeito dos algoritmos de engajamento no bem-estar da população.</p>
+      </article>
     </section>
 
-    <!-- MÓDULO 2: EXCLUSÃO DIGITAL & APARTHEID DE DADOS -->
-    <section class="cyber-card" id="card-exclusao">
-      <div class="card-tag">02 // DESIGUALDADE SOCIAL</div>
-      <h2>O Abismo da Franquia Zero</h2>
-      <p>
-        Mais de 30 milhões de brasileiros só acessam a internet via pacotes "Zero Rating" (redes sociais ilimitadas, mas sem acesso à web aberta).
-      </p>
-
-      <div class="interactive-simulator">
-        <h3>Simulador de Acesso Livre vs. Restrito</h3>
-        <p>Ajuste o controle abaixo para ver a qualidade do acesso de um cidadão conforme sua renda:</p>
-
-        <input type="range" id="income-slider" min="1" max="5" value="2" oninput="atualizarSimuladorRenda(this.value)" />
-
-        <div class="income-indicator" id="income-label">Renda: 1 Salário Mínimo (Acesso Restrito a Redes Pré-Pagas)</div>
-
-        <div class="web-preview" id="web-preview">
-          <div class="preview-header">Navegador Web SIMULADO</div>
-          <div class="preview-body" id="preview-body">
-            <div class="blocked-banner" id="blocked-banner">⚠️ Sua franquia de dados acabou. Você só pode enviar mensagens de texto no WhatsApp. Não é possível acessar sites de notícias, cursos ou bancos.</div>
-            <h4>Portal de Oportunidades & Educação</h4>
-            <p>Conteúdo bloqueado por falta de saldo de dados...</p>
-          </div>
-        </div>
+    <section class="interativo">
+      <h2>Qual dilema é mais urgente no país?</h2>
+      <div class="botoes-voto">
+        <button onclick="votar('Exclusão Digital')">Exclusão Digital</button>
+        <button onclick="votar('Desinformação')">Desinformação</button>
+        <button onclick="votar('Saúde Mental')">Saúde Mental</button>
       </div>
+      <p id="resultado-voto"></p>
     </section>
-
-    <!-- MÓDULO 3: SAÚDE MENTAL & ALGORITMOS -->
-    <section class="cyber-card" id="card-algoritmo">
-      <div class="card-tag">03 // HIPERCONEXÃO & SAÚDE</div>
-      <h2>Calculadora da Bolha Algorítmica</h2>
-      <p>Descubra como os algoritmos das grandes Big Techs afetam o seu nível de retenção e ansiedade diária.</p>
-
-      <div class="radar-interactive">
-        <label>Quantas horas por dia você passa no TikTok/Reels?</label>
-        <select id="screen-time" onchange="calcularImpacto()">
-          <option value="1">Menos de 1 hora</option>
-          <option value="3" selected>De 2 a 4 horas</option>
-          <option value="6">Mais de 6 horas</option>
-        </select>
-
-        <label>Qual o seu hábito ao ver uma notícia polêmica?</label>
-        <select id="user-habit" onchange="calcularImpacto()">
-          <option value="low">Ignoro e continuo rolando</option>
-          <option value="med">Lio os comentários por alguns minutos</option>
-          <option value="high">Comento, discuto e compartilho imediatamente</option>
-        </select>
-
-        <div class="impact-result">
-          <h4>Seu Nível de Exposição ao Loop de Dopamina:</h4>
-          <div class="meter-bar">
-            <div class="meter-fill" id="meter-fill" style="width: 65%;"></div>
-          </div>
-          <span class="meter-text" id="meter-text">65% - Nível Alto de Sobrecarga Noturna</span>
-        </div>
-      </div>
-    </section>
-
   </main>
-
-  <!-- Rodapé com Créditos e Manifesto -->
-  <footer class="cyber-footer">
-    <div class="footer-content">
-      <p>Dilemas Digitais no Brasil &copy; 2026 — Um projeto interativo sobre cidadania e tecnologia.</p>
-      <div class="footer-links">
-        <a href="javascript:void(0)" onclick="alert('Iniciativa focada na conscientização sobre o uso crítico das redes sociais no Brasil.')">Sobre o Projeto</a>
-        <a href="javascript:void(0)" onclick="alert('Desenvolvido com HTML5, CSS3 Puro e Javascript ES6 sem dependências externas.')">Tecnologia</a>
-      </div>
-    </div>
-  </footer>
 
   <script src="script.js"></script>
 </body>

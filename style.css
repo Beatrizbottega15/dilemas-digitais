@@ -1,459 +1,99 @@
-/* ==========================================
-   RESET & VARIÁVEIS GLOBAIS
-   ========================================== */
 :root {
-  --bg-dark: #050811;
-  --card-bg: rgba(15, 23, 42, 0.75);
-  --cyan-neon: #00f3ff;
-  --magenta-neon: #ff0055;
-  --green-neon: #00ff66;
-  --yellow-neon: #ffe600;
-  --text-main: #f1f5f9;
-  --text-muted: #94a3b8;
-  --border-neon: rgba(0, 243, 255, 0.3);
-  --font-title: 'Orbitron', sans-serif;
-  --font-body: 'Rajdhani', sans-serif;
+  --bg: #0f172a;
+  --card-bg: #1e293b;
+  --primary: #38bdf8;
+  --text: #f8fafc;
+  --accent: #22c55e;
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  cursor: default;
-}
-
-html {
-  scroll-behavior: smooth;
+  font-family: 'Segoe UI', system-ui, sans-serif;
 }
 
 body {
-  background-color: var(--bg-dark);
-  color: var(--text-main);
-  font-family: var(--font-body);
-  font-size: 18px;
-  overflow-x: hidden;
-  position: relative;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 2rem 1rem;
 }
 
-/* ==========================================
-   CANVAS DE BACKGROUND & CURSOR
-   ========================================== */
-#bg-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-  background: radial-gradient(circle at center, #0a1128 0%, #02040a 100%);
-}
-
-.custom-cursor {
-  position: fixed;
-  width: 16px;
-  height: 16px;
-  border: 2px solid var(--cyan-neon);
-  border-radius: 50%;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  transition: transform 0.05s ease, background 0.2s ease;
-  z-index: 9999;
-  box-shadow: 0 0 10px var(--cyan-neon);
-}
-
-/* ==========================================
-   HEADER / HUD
-   ========================================== */
-.hud-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.2rem 2rem;
-  border-bottom: 1px solid var(--border-neon);
-  background: rgba(5, 8, 17, 0.85);
-  backdrop-filter: blur(10px);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.dot-live {
-  width: 10px;
-  height: 10px;
-  background-color: var(--green-neon);
-  border-radius: 50%;
-  box-shadow: 0 0 10px var(--green-neon);
-  animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-  0% { opacity: 0.3; }
-  50% { opacity: 1; }
-  100% { opacity: 0.3; }
-}
-
-.hud-title {
-  font-family: var(--font-title);
-  font-weight: 700;
-  color: var(--cyan-neon);
-  letter-spacing: 2px;
-  font-size: 1.1rem;
-}
-
-.hud-stats {
-  display: flex;
-  gap: 2rem;
-}
-
-.stat-item {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  font-size: 0.85rem;
-}
-
-.stat-item .label {
-  color: var(--text-muted);
-}
-
-.stat-item .value {
-  font-family: var(--font-title);
-  font-weight: bold;
-}
-
-.cyan { color: var(--cyan-neon); }
-
-/* ==========================================
-   HERO SECTION
-   ========================================== */
-.hero-section {
+header {
   text-align: center;
-  padding: 5rem 1.5rem 3rem 1.5rem;
+  margin-bottom: 3rem;
+}
+
+header h1 {
+  color: var(--primary);
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.container {
   max-width: 900px;
   margin: 0 auto;
 }
 
-.glitch-text {
-  font-family: var(--font-title);
-  font-size: 3.2rem;
-  font-weight: 900;
-  color: #fff;
-  text-shadow: 0 0 15px rgba(0, 243, 255, 0.6);
-  margin-bottom: 1rem;
-  letter-spacing: 3px;
-}
-
-.hero-subtitle {
-  font-size: 1.3rem;
-  color: var(--text-muted);
-  margin-bottom: 2.5rem;
-  line-height: 1.6;
-}
-
-.hero-actions {
-  display: flex;
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
-  justify-content: center;
-  flex-wrap: wrap;
+  margin-bottom: 3rem;
 }
 
-.btn-primary, .btn-secondary {
-  font-family: var(--font-title);
-  padding: 1rem 2rem;
-  font-size: 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.btn-primary {
-  background: var(--cyan-neon);
-  color: #000;
-  border: none;
-  font-weight: bold;
-  box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
-}
-
-.btn-primary:hover {
-  background: #fff;
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
-  transform: translateY(-2px);
-}
-
-.btn-secondary {
-  background: transparent;
-  color: var(--magenta-neon);
-  border: 1px solid var(--magenta-neon);
-  box-shadow: 0 0 10px rgba(255, 0, 85, 0.2);
-}
-
-.btn-secondary:hover {
-  background: var(--magenta-neon);
-  color: #fff;
-  box-shadow: 0 0 20px rgba(255, 0, 85, 0.6);
-}
-
-/* ==========================================
-   CARDS & MÓDULOS INTERATIVOS
-   ========================================== */
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 2rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-}
-
-.cyber-card {
+.card {
   background: var(--card-bg);
-  border: 1px solid var(--border-neon);
-  border-radius: 12px;
-  padding: 2.5rem;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  backdrop-filter: blur(8px);
-  position: relative;
-  overflow: hidden;
-  transition: border-color 0.3s ease;
-}
-
-.cyber-card:hover {
-  border-color: var(--cyan-neon);
-}
-
-.card-tag {
-  font-family: var(--font-title);
-  font-size: 0.8rem;
-  color: var(--cyan-neon);
-  letter-spacing: 2px;
-  margin-bottom: 0.5rem;
-}
-
-.cyber-card h2 {
-  font-family: var(--font-title);
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-.cyber-card p {
-  color: var(--text-muted);
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-}
-
-/* --- Módulo 1: Jogo Fake News --- */
-.game-container {
-  background: rgba(0, 0, 0, 0.4);
   padding: 1.5rem;
   border-radius: 8px;
-  border-left: 4px solid var(--cyan-neon);
-}
-
-.news-box {
-  background: #0d1527;
-  padding: 1.2rem;
-  border-radius: 6px;
-  margin-bottom: 1.5rem;
-}
-
-.news-source {
-  font-size: 0.8rem;
-  color: var(--yellow-neon);
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.news-content {
-  font-size: 1.2rem;
-  color: #fff;
-  font-weight: 600;
-}
-
-.game-controls {
-  display: flex;
-  gap: 1rem;
-}
-
-.btn-fake, .btn-real {
-  flex: 1;
-  padding: 0.8rem;
-  font-family: var(--font-title);
-  font-weight: bold;
-  border: none;
-  border-radius: 4px;
+  border-left: 4px solid var(--primary);
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.2s, border-color 0.2s;
 }
 
-.btn-fake {
-  background: var(--magenta-neon);
-  color: #fff;
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent);
 }
 
-.btn-real {
-  background: var(--green-neon);
-  color: #000;
-}
-
-.btn-fake:hover, .btn-real:hover {
-  transform: scale(1.02);
-}
-
-.feedback-msg {
-  margin-top: 1rem;
-  font-weight: bold;
-  min-height: 24px;
-}
-
-.score-board {
-  margin-top: 1rem;
-  font-size: 0.9rem;
-  color: var(--text-muted);
-}
-
-/* --- Módulo 2: Simulador Franquia Zero --- */
-#income-slider {
-  width: 100%;
-  margin: 1rem 0;
-  accent-color: var(--cyan-neon);
-  cursor: pointer;
-}
-
-.income-indicator {
-  font-weight: bold;
-  color: var(--yellow-neon);
-  margin-bottom: 1.5rem;
-}
-
-.web-preview {
-  background: #ffffff;
-  color: #222;
-  border-radius: 6px;
-  overflow: hidden;
-  transition: filter 0.5s ease;
-}
-
-.preview-header {
-  background: #e2e8f0;
-  padding: 0.5rem 1rem;
-  font-size: 0.8rem;
-  color: #64748b;
-  font-family: monospace;
-}
-
-.preview-body {
-  padding: 1.5rem;
-  position: relative;
-}
-
-.blocked-banner {
-  display: none;
-  background: #fee2e2;
-  color: #991b1b;
-  padding: 1rem;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-  border: 1px solid #f87171;
-}
-
-/* Modo Modo Franquia Esgotada */
-body.zero-data-mode .web-preview {
-  filter: grayscale(100%) opacity(0.4);
-}
-
-body.zero-data-mode .blocked-banner {
-  display: block;
-}
-
-/* --- Módulo 3: Calculadora --- */
-.radar-interactive label {
-  display: block;
-  margin-top: 1rem;
+.card h2 {
   margin-bottom: 0.5rem;
+  font-size: 1.25rem;
 }
 
-.radar-interactive select {
-  width: 100%;
-  padding: 0.8rem;
-  background: #0d1527;
-  color: #fff;
-  border: 1px solid var(--border-neon);
-  border-radius: 4px;
-  font-family: var(--font-body);
-  font-size: 1rem;
-}
-
-.impact-result {
-  margin-top: 2rem;
-}
-
-.meter-bar {
-  width: 100%;
-  height: 20px;
-  background: #1e293b;
-  border-radius: 10px;
-  overflow: hidden;
-  margin: 0.8rem 0;
-}
-
-.meter-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--green-neon), var(--yellow-neon), var(--magenta-neon));
-  transition: width 0.5s ease;
-}
-
-.meter-text {
-  font-family: var(--font-title);
-  color: var(--cyan-neon);
-  font-size: 0.95rem;
-}
-
-/* ==========================================
-   FOOTER
-   ========================================== */
-.cyber-footer {
-  border-top: 1px solid var(--border-neon);
-  padding: 2rem 1.5rem;
+.interativo {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 8px;
   text-align: center;
-  background: rgba(5, 8, 17, 0.95);
-  font-size: 0.9rem;
-  color: var(--text-muted);
 }
 
-.footer-content {
-  max-width: 900px;
-  margin: 0 auto;
+.botoes-voto {
   display: flex;
-  flex-direction: column;
   gap: 1rem;
-  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 1.5rem 0;
 }
 
-.footer-links {
-  display: flex;
-  gap: 1.5rem;
+button {
+  background: var(--primary);
+  color: var(--bg);
+  border: none;
+  padding: 0.75rem 1.25rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: opacity 0.2s;
 }
 
-.footer-links a {
-  color: var(--cyan-neon);
-  text-decoration: none;
+button:hover {
+  opacity: 0.9;
 }
 
-.footer-links a:hover {
-  text-decoration: underline;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .hud-stats { display: none; }
-  .glitch-text { font-size: 2.2rem; }
-  .cyber-card { padding: 1.5rem; }
+#resultado-voto {
+  color: var(--accent);
+  font-weight: bold;
+  margin-top: 1rem;
 }
