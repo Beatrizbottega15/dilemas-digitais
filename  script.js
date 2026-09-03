@@ -10,7 +10,7 @@ const dilemas = [
         ],
         correct: 1,
         feedback:
-            "Boa escolha! Links desconhecidos podem levar a golpes ou páginas falsas. Antes de fornecer dados, é importante verificar a origem da mensagem."
+            "Boa escolha! Links desconhecidos podem levar a golpes ou páginas falsas."
     },
 
     {
@@ -24,7 +24,7 @@ const dilemas = [
         ],
         correct: 1,
         feedback:
-            "Respeitar a privacidade também vale no ambiente digital. Uma foto que parece engraçada para você pode deixar outra pessoa desconfortável."
+            "Respeitar a privacidade também vale no ambiente digital."
     },
 
     {
@@ -38,7 +38,7 @@ const dilemas = [
         ],
         correct: 1,
         feedback:
-            "Mandou bem! Verificar a fonte, a data e outras referências ajuda a evitar a propagação de desinformação."
+            "Boa! Verificar a fonte antes de compartilhar ajuda a combater a desinformação."
     },
 
     {
@@ -52,7 +52,7 @@ const dilemas = [
         ],
         correct: 1,
         feedback:
-            "Senhas são pessoais. Mesmo pessoas próximas não precisam ter acesso às suas contas. Uma senha forte e exclusiva aumenta sua segurança."
+            "Senhas são pessoais. Mesmo pessoas próximas não devem ter acesso às suas contas."
     },
 
     {
@@ -66,60 +66,92 @@ const dilemas = [
         ],
         correct: 1,
         feedback:
-            "A IA pode ser uma ótima ferramenta de apoio, mas é importante compreender, verificar e assumir responsabilidade pelo que você apresenta."
+            "A IA pode ajudar muito, mas é importante verificar, compreender e assumir responsabilidade pelo conteúdo."
     }
 ];
 
 let atual = 0;
 let pontos = 0;
+let respondido = false;
+
+
+// ===============================
+// INICIAR
+// ===============================
 
 function iniciarDilemas() {
+
     document.getElementById("dilemas").scrollIntoView({
         behavior: "smooth"
     });
+
 }
+
+
+// ===============================
+// CARREGAR DILEMA
+// ===============================
 
 function carregarDilema() {
 
     const dilema = dilemas[atual];
 
-    document.getElementById("dilemaNumber").textContent =
+    const numero = document.getElementById("dilemaNumber");
+    const icone = document.getElementById("dilemaIcon");
+    const titulo = document.getElementById("dilemaTitle");
+    const descricao = document.getElementById("dilemaDescription");
+    const choices = document.getElementById("choices");
+    const feedback = document.getElementById("feedback");
+
+    numero.textContent =
         `DILEMA #${String(atual + 1).padStart(2, "0")}`;
 
-    document.getElementById("dilemaIcon").textContent =
-        dilema.icon;
+    icone.textContent = dilema.icon;
 
-    document.getElementById("dilemaTitle").textContent =
-        dilema.title;
+    titulo.textContent = dilema.title;
 
-    document.getElementById("dilemaDescription").textContent =
-        dilema.description;
+    descricao.textContent = dilema.description;
 
-    const choices = document.getElementById("choices");
+    feedback.classList.remove("show");
+    feedback.textContent = "";
 
     choices.innerHTML = "";
 
-    dilema.choices.forEach((choice, index) => {
+    respondido = false;
 
-        const button = document.createElement("button");
 
-        button.className = "choice";
+    // Criar os dois botões
+    dilema.choices.forEach((texto, index) => {
 
-        button.innerHTML = `
+        const botao = document.createElement("button");
+
+        botao.className = "choice";
+
+        botao.type = "button";
+
+        botao.innerHTML = `
             <span>${index === 0 ? "A" : "B"}</span>
-            ${choice}
+            ${texto}
         `;
 
-        button.onclick = () => escolher(index);
 
-        choices.appendChild(button);
+        // Evento de clique
+        botao.addEventListener("click", function () {
+
+            escolher(index);
+
+        });
+
+
+        choices.appendChild(botao);
+
     });
 
-    document.getElementById("feedback").classList.remove("show");
-    document.getElementById("feedback").textContent = "";
 
     atualizarProgresso();
 
+
+    // Animação
     const card = document.getElementById("dilemaCard");
 
     card.classList.remove("fade");
@@ -129,6 +161,11 @@ function carregarDilema() {
     card.classList.add("fade");
 }
 
+
+// ===============================
+// PROGRESSO
+// ===============================
+
 function atualizarProgresso() {
 
     const total = dilemas.length;
@@ -136,41 +173,86 @@ function atualizarProgresso() {
     const percentual =
         ((atual + 1) / total) * 100;
 
+
     document.getElementById("progress").style.width =
         percentual + "%";
+
 
     document.getElementById("progressText").textContent =
         `Dilema ${atual + 1} de ${total}`;
 
+
     document.getElementById("progressPercent").textContent =
-        `${percentual}%`;
+        `${Math.round(percentual)}%`;
 }
 
+
+// ===============================
+// ESCOLHER RESPOSTA
+// ===============================
+
 function escolher(opcao) {
+
+    // Impede dois cliques
+    if (respondido) {
+        return;
+    }
+
+    respondido = true;
 
     const dilema = dilemas[atual];
 
     const botoes =
         document.querySelectorAll(".choice");
 
-    botoes.forEach(botao => {
+
+    // Desabilita os botões
+    botoes.forEach((botao, index) => {
+
         botao.disabled = true;
+
+        if (index === dilema.correct) {
+
+            botao.style.borderColor = "#70ffb0";
+            botao.style.background =
+                "rgba(112,255,176,0.08)";
+
+        }
+
+        if (index === opcao && opcao !== dilema.correct) {
+
+            botao.style.borderColor = "#ff5c7a";
+            botao.style.background =
+                "rgba(255,92,122,0.08)";
+
+        }
+
     });
 
+
+    // Pontuação
     if (opcao === dilema.correct) {
+
         pontos++;
+
     }
 
+
+    // Mostrar explicação
     const feedback =
         document.getElementById("feedback");
 
-    feedback.textContent = dilema.feedback;
+    feedback.textContent =
+        dilema.feedback;
 
     feedback.classList.add("show");
 
+
+    // Próxima pergunta
     setTimeout(() => {
 
         atual++;
+
 
         if (atual < dilemas.length) {
 
@@ -182,69 +264,113 @@ function escolher(opcao) {
 
         }
 
-    }, 2200);
+    }, 2500);
+
 }
+
+
+// ===============================
+// RESULTADO
+// ===============================
 
 function mostrarResultado() {
 
     const resultado =
         document.getElementById("resultado");
 
+
     resultado.classList.add("show");
+
 
     document.getElementById("score").textContent =
         pontos;
 
+
     let titulo;
     let descricao;
+
 
     if (pontos === 5) {
 
         titulo = "Guardião Digital 🛡️";
 
         descricao =
-            "Você demonstra bastante consciência digital. Antes de clicar, compartilhar ou publicar, você pensa nas consequências.";
+            "Incrível! Você demonstrou muita responsabilidade, segurança e consciência nas suas escolhas digitais.";
 
-    } else if (pontos >= 3) {
+    }
+
+    else if (pontos >= 3) {
 
         titulo = "Pensador Digital 🧠";
 
         descricao =
-            "Você está no caminho certo! Algumas decisões ainda podem melhorar, mas você já demonstra preocupação com segurança e responsabilidade.";
+            "Muito bem! Você está atento aos principais riscos digitais, mas ainda pode melhorar algumas escolhas.";
 
-    } else {
+    }
+
+    else {
 
         titulo = "Explorador Digital 🚀";
 
         descricao =
-            "A internet é cheia de possibilidades, mas também exige atenção. Que tal pensar um pouco mais antes do próximo clique?";
+            "A internet oferece muitas possibilidades, mas também exige atenção. Pense um pouco mais antes do próximo clique!";
+
     }
+
 
     document.getElementById("profileTitle").textContent =
         titulo;
 
+
     document.getElementById("profileDescription").textContent =
         descricao;
+
 
     resultado.scrollIntoView({
         behavior: "smooth"
     });
+
 }
+
+
+// ===============================
+// REINICIAR
+// ===============================
 
 function reiniciar() {
 
     atual = 0;
+
     pontos = 0;
+
+    respondido = false;
+
 
     document.getElementById("resultado")
         .classList.remove("show");
 
+
     carregarDilema();
 
-    document.getElementById("dilemas")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
+
+    setTimeout(() => {
+
+        document.getElementById("dilemas")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+    }, 100);
+
 }
 
-carregarDilema();
+
+// ===============================
+// INICIAR SITE
+// ===============================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    carregarDilema();
+
+});
