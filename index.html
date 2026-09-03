@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Dilemas Digitais</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -16,202 +19,341 @@
         <span></span>
     </div>
 
+    <!-- MENU -->
+
     <header>
-        <div class="logo">◈ DILEMAS<span>.DIGITAIS</span></div>
+
+        <div class="logo">
+            ◈ DILEMAS<span>.DIGITAIS</span>
+        </div>
 
         <nav>
             <a href="#inicio">Início</a>
             <a href="#dilemas">Dilemas</a>
             <a href="#sobre">Sobre</a>
         </nav>
+
     </header>
 
-    <main>
 
-        <!-- HERO -->
-        <section class="hero" id="inicio">
+    <!-- HERO -->
 
-            <div class="hero-text">
-                <p class="tag">⚡ CONECTADO DEMAIS?</p>
+    <section class="hero" id="inicio">
 
-                <h1>
-                    E se o próximo
-                    <span>clique</span>
-                    fosse uma escolha?
-                </h1>
+        <div class="hero-text">
 
-                <p class="description">
-                    Na internet, pequenas decisões podem ter grandes consequências.
-                    Explore situações do cotidiano digital e descubra como você reagiria.
-                </p>
+            <p class="tag">
+                ⚡ CONECTADO DEMAIS?
+            </p>
 
-                <button class="start-btn" onclick="iniciarDilemas()">
-                    ENTRAR NOS DILEMAS →
-                </button>
+            <h1>
+                E se o próximo
+                <span>clique</span>
+                fosse uma escolha?
+            </h1>
+
+            <p class="description">
+                Na internet, pequenas decisões podem ter grandes
+                consequências. Teste suas escolhas digitais.
+            </p>
+
+            <button class="start-btn" id="startBtn">
+                ENTRAR NOS DILEMAS →
+            </button>
+
+        </div>
+
+
+        <div class="hero-card">
+
+            <div class="floating-icon">
+                ⌁
             </div>
 
-            <div class="hero-card">
-                <div class="card-glow"></div>
-
-                <div class="floating-icon">⌁</div>
-
-                <p>STATUS DO SISTEMA</p>
-
-                <h2>VOCÊ ESTÁ ONLINE</h2>
-
-                <div class="status">
-                    <span></span>
-                    conectado
-                </div>
-
-                <div class="mini-text">
-                    escolhas digitais detectadas...
-                </div>
-            </div>
-
-        </section>
-
-        <!-- DILEMAS -->
-        <section class="dilemas-section" id="dilemas">
-
-            <div class="section-title">
-                <p class="tag">01 / ESCOLHA COM CUIDADO</p>
-                <h2>Qual seria <span>a sua decisão?</span></h2>
-                <p>
-                    Não existem respostas perfeitas. Existem consequências.
-                </p>
-            </div>
-
-            <div class="progress-container">
-                <div class="progress-info">
-                    <span id="progressText">Dilema 1 de 5</span>
-                    <span id="progressPercent">20%</span>
-                </div>
-
-                <div class="progress-bar">
-                    <div id="progress"></div>
-                </div>
-            </div>
-
-            <div class="dilema-card" id="dilemaCard">
-
-                <div class="dilema-number" id="dilemaNumber">
-                    DILEMA #01
-                </div>
-
-                <div class="dilema-icon" id="dilemaIcon">📱</div>
-
-                <h3 id="dilemaTitle">
-                    A mensagem suspeita
-                </h3>
-
-                <p id="dilemaDescription">
-                    Você recebe uma mensagem de um desconhecido dizendo
-                    que você ganhou um prêmio. Para receber, basta clicar
-                    em um link e informar alguns dados pessoais.
-                </p>
-
-                <div class="choices" id="choices">
-
-                    <button class="choice" onclick="escolher(0)">
-                        <span>A</span>
-                        Clicar no link e conferir o prêmio.
-                    </button>
-
-                    <button class="choice" onclick="escolher(1)">
-                        <span>B</span>
-                        Ignorar e apagar a mensagem.
-                    </button>
-
-                </div>
-
-                <div class="feedback" id="feedback"></div>
-
-            </div>
-
-        </section>
-
-        <!-- RESULTADO -->
-        <section class="result-section" id="resultado">
-
-            <div class="result-box">
-
-                <div class="result-icon">◉</div>
-
-                <p class="tag">ANÁLISE CONCLUÍDA</p>
-
-                <h2>Seu perfil digital</h2>
-
-                <div class="score">
-                    <span id="score">0</span>
-                    <small>/ 5</small>
-                </div>
-
-                <h3 id="profileTitle">Pensador Digital</h3>
-
-                <p id="profileDescription">
-                    Você analisa as consequências antes de agir.
-                </p>
-
-                <button onclick="reiniciar()" class="restart-btn">
-                    ↻ JOGAR NOVAMENTE
-                </button>
-
-            </div>
-
-        </section>
-
-        <!-- SOBRE -->
-        <section class="about" id="sobre">
-
-            <p class="tag">02 / POR QUE ISSO IMPORTA?</p>
+            <p>
+                STATUS DO SISTEMA
+            </p>
 
             <h2>
-                A tecnologia muda.
-                <span>As escolhas continuam.</span>
+                VOCÊ ESTÁ ONLINE
             </h2>
 
-            <div class="about-grid">
+            <div class="status">
+                <span></span>
+                conectado
+            </div>
 
-                <div>
-                    <strong>01</strong>
-                    <h3>Privacidade</h3>
-                    <p>
-                        Quanto da nossa vida estamos dispostos a compartilhar
-                        para ter mais praticidade?
-                    </p>
-                </div>
+            <div class="mini-text">
+                escolhas digitais detectadas...
+            </div>
 
-                <div>
-                    <strong>02</strong>
-                    <h3>Informação</h3>
-                    <p>
-                        Antes de compartilhar algo, você verifica se aquilo
-                        realmente é verdadeiro?
-                    </p>
-                </div>
+        </div>
 
-                <div>
-                    <strong>03</strong>
-                    <h3>Responsabilidade</h3>
-                    <p>
-                        Cada clique, comentário e compartilhamento pode
-                        afetar outras pessoas.
-                    </p>
-                </div>
+    </section>
+
+
+    <!-- DILEMAS -->
+
+    <section class="dilemas-section" id="dilemas">
+
+        <div class="section-title">
+
+            <p class="tag">
+                01 / ESCOLHA COM CUIDADO
+            </p>
+
+            <h2>
+                Qual seria
+                <span>a sua decisão?</span>
+            </h2>
+
+            <p>
+                Não existem respostas perfeitas.
+                Existem consequências.
+            </p>
+
+        </div>
+
+
+        <!-- PROGRESSO -->
+
+        <div class="progress-container">
+
+            <div class="progress-info">
+
+                <span id="progressText">
+                    Dilema 1 de 5
+                </span>
+
+                <span id="progressPercent">
+                    20%
+                </span>
 
             </div>
 
-        </section>
+            <div class="progress-bar">
 
-    </main>
+                <div id="progress"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CARD -->
+
+        <div class="dilema-card" id="dilemaCard">
+
+            <div class="dilema-number" id="dilemaNumber">
+                DILEMA #01
+            </div>
+
+
+            <div class="dilema-icon" id="dilemaIcon">
+                📱
+            </div>
+
+
+            <h3 id="dilemaTitle">
+                A mensagem suspeita
+            </h3>
+
+
+            <p id="dilemaDescription">
+
+                Você recebe uma mensagem de um desconhecido
+                dizendo que você ganhou um prêmio.
+
+                Para receber, basta clicar em um link e
+                informar alguns dados pessoais.
+
+            </p>
+
+
+            <!-- BOTÕES -->
+
+            <div class="choices" id="choices">
+
+                <button
+                    type="button"
+                    class="choice"
+                    id="choiceA">
+
+                    <span>A</span>
+
+                    Clicar no link e conferir o prêmio.
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="choice"
+                    id="choiceB">
+
+                    <span>B</span>
+
+                    Ignorar e apagar a mensagem.
+
+                </button>
+
+            </div>
+
+
+            <!-- FEEDBACK -->
+
+            <div
+                class="feedback"
+                id="feedback">
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- RESULTADO -->
+
+    <section
+        class="result-section"
+        id="resultado">
+
+        <div class="result-box">
+
+            <div class="result-icon">
+                ◉
+            </div>
+
+            <p class="tag">
+                ANÁLISE CONCLUÍDA
+            </p>
+
+            <h2>
+                Seu perfil digital
+            </h2>
+
+            <div class="score">
+
+                <span id="score">
+                    0
+                </span>
+
+                <small>
+                    / 5
+                </small>
+
+            </div>
+
+            <h3 id="profileTitle">
+                Pensador Digital
+            </h3>
+
+            <p id="profileDescription">
+                Você analisa as consequências antes de agir.
+            </p>
+
+            <button
+                class="restart-btn"
+                id="restartBtn">
+
+                ↻ JOGAR NOVAMENTE
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- SOBRE -->
+
+    <section
+        class="about"
+        id="sobre">
+
+        <p class="tag">
+            02 / POR QUE ISSO IMPORTA?
+        </p>
+
+        <h2>
+            A tecnologia muda.
+            <span>As escolhas continuam.</span>
+        </h2>
+
+
+        <div class="about-grid">
+
+            <div>
+
+                <strong>01</strong>
+
+                <h3>
+                    Privacidade
+                </h3>
+
+                <p>
+                    Quanto da nossa vida estamos dispostos
+                    a compartilhar para ter mais praticidade?
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <strong>02</strong>
+
+                <h3>
+                    Informação
+                </h3>
+
+                <p>
+                    Antes de compartilhar algo, você verifica
+                    se aquilo realmente é verdadeiro?
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <strong>03</strong>
+
+                <h3>
+                    Responsabilidade
+                </h3>
+
+                <p>
+                    Cada clique, comentário e compartilhamento
+                    pode afetar outras pessoas.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
 
     <footer>
-        <p>◈ DILEMAS.DIGITAIS</p>
-        <span>Escolha. Clique. Reflita.</span>
+
+        <p>
+            ◈ DILEMAS.DIGITAIS
+        </p>
+
+        <span>
+            Escolha. Clique. Reflita.
+        </span>
+
     </footer>
 
-    <script src="script.js"></script>
+
+    <!-- MUITO IMPORTANTE -->
+
+    <script src="./script.js"></script>
 
 </body>
+
 </html>
