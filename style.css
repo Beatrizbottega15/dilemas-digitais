@@ -138,7 +138,11 @@ nav a:hover {
         var(--pink),
         var(--blue)
     );
+
     -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
     color: transparent;
 }
 
@@ -416,8 +420,17 @@ nav a:hover {
     margin: 30px;
     font-size: 80px;
     font-weight: 700;
-    background: linear-gradient(90deg,var(--purple),var(--pink));
+
+    background: linear-gradient(
+        90deg,
+        var(--purple),
+        var(--pink)
+    );
+
     -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
     color: transparent;
 }
 
